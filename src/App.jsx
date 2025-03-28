@@ -13,7 +13,9 @@ const App = () => {
     //   <button onClick={() => setShow(false)}>ocultar</button>
     //   {show && <CounterApp />}
     // </div>
-    <FakeStoreApp />
+    <div className="bg-light">
+      <FakeStoreApp />
+    </div>
   );
 };
 
