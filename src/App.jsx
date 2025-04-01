@@ -1,20 +1,22 @@
-import React, { useState } from "react";
-import CounterApp from "./components/CounterApp";
-import FakeStoreApp from "./components/FakeStoreApp";
+import { BrowserRouter, Routes, Route } from "react-router-dom";
+import HomeScreen from "./pages/HomeScreen";
+import AboutScreen from "./pages/AboutScreen";
+import NotFoundScreen from "./pages/NotFoundScreen";
+import NavBarApp from "./components/NavBarApp";
+import ProductScreen from "./pages/ProductScreen";
 
 const App = () => {
-  // useEffect(() => {
-  //   //las acciones que se disparan con el useEffect
-  // }, []); //arreglo de dependencias
-  // const [show, setShow] = useState(true);
-
   return (
-    // <div>
-    //   <button onClick={() => setShow(false)}>ocultar</button>
-    //   {show && <CounterApp />}
-    // </div>
     <div className="bg-light">
-      <FakeStoreApp />
+      <BrowserRouter>
+        <NavBarApp />
+        <Routes>
+          <Route path="/" element={<HomeScreen />} />
+          <Route path="/about" element={<AboutScreen />} />
+          <Route path="/product/:id" element={<ProductScreen />} />
+          <Route path="*" element={<NotFoundScreen />} />
+        </Routes>
+      </BrowserRouter>
     </div>
   );
 };

@@ -3,3 +3,7 @@
   height: 200px;
   padding: 10px;
 }
+
+.nav-rolling {
+  text-decoration: underline;
+}
