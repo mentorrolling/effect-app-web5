@@ -4,11 +4,12 @@ import AboutScreen from "./pages/AboutScreen";
 import NotFoundScreen from "./pages/NotFoundScreen";
 import NavBarApp from "./components/NavBarApp";
 import ProductScreen from "./pages/ProductScreen";
+import TodoApp from "./components/TodoApp";
 
 const App = () => {
   return (
     <div className="bg-light">
-      <BrowserRouter>
+      {/* <BrowserRouter>
         <NavBarApp />
         <Routes>
           <Route path="/" element={<HomeScreen />} />
@@ -16,7 +17,8 @@ const App = () => {
           <Route path="/product/:id" element={<ProductScreen />} />
           <Route path="*" element={<NotFoundScreen />} />
         </Routes>
-      </BrowserRouter>
+      </BrowserRouter> */}
+      <TodoApp />
     </div>
   );
 };
