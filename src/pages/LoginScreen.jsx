@@ -1,3 +1,4 @@
+import { useEffect } from "react";
 import { useForm } from "react-hook-form";
 import { useNavigate } from "react-router-dom";
 
@@ -13,6 +14,10 @@ const LoginScreen = () => {
   // const [user, setUser] = useState(null);
   const navigate = useNavigate();
 
+  useEffect(() => {
+    localStorage.removeItem("user");
+  }, []);
+
   const inicioSesion = (d) => {
     // setUser(d);
     localStorage.setItem("user", JSON.stringify(d));
@@ -23,7 +28,7 @@ const LoginScreen = () => {
 
   return (
     <div className="container">
-      <div className="row justify-content-center">
+      <div className="row pt-5 justify-content-center">
         <div className="col-md-8 col-lg-6">
           <div className="login-container p-5">
             <div className="text-center mb-5">
