@@ -7,4 +7,11 @@ const getProducts = async () => {
   return data;
 };
 
-export { getProducts };
+const getProductId = async (id) => {
+  const resp = await fetch(url + "/" + id);
+  const data = await resp.json();
+
+  return data;
+};
+
+export { getProducts, getProductId };

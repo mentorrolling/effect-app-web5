@@ -7,7 +7,7 @@ const CardProduct = (props) => {
   const { image, title, id } = props.product;
   return (
     <div className="col">
-      <Link to={`/product/${id}`}>
+      <Link className="card-link" to={`/product/${id}`}>
         <div className="card h-100">
           <img src={image} className="card-img-top card-image" alt={title} />
           <div className="card-body">

@@ -42,6 +42,11 @@ const NavBarApp = () => {
                 About
               </NavLink>
             </li>
+            <li className="nav-item">
+              <Link className="nav-link" to="/login">
+                Cerrar sesión
+              </Link>
+            </li>
           </ul>
         </div>
       </div>

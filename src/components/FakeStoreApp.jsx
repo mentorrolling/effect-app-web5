@@ -58,11 +58,15 @@ const FakeStoreApp = () => {
         </div>
       </div>
 
-      <div className="row row-cols-1 row-cols-md-3 row-cols-lg-4 g-4">
-        {currentProducts.map((product) => (
-          <CardProduct key={product.id} product={product} />
-        ))}
-      </div>
+      {currentProducts.length > 0 ? (
+        <div className="row row-cols-1 row-cols-md-3 row-cols-lg-4 g-4">
+          {currentProducts.map((product) => (
+            <CardProduct key={product.id} product={product} />
+          ))}
+        </div>
+      ) : (
+        <h3>Cargando productos...</h3>
+      )}
     </div>
   );
 };
