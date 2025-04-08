@@ -1,53 +1,67 @@
-import React, { useEffect, useState } from "react";
-import { getProducts, deleteProduct } from "../helpers/apiFake";
+import { useState } from "react";
+import ModalUpdateApp from "./ModalUpdateApp";
 
-const TableProductsApp = () => {
-  const [products, setProducts] = useState([]);
+const TableProductsApp = ({ products, borrarProducto, updateProduct }) => {
+  const [producto, setProducto] = useState(null);
+  const [show, setShow] = useState(false);
 
-  useEffect(() => {
-    getProducts().then((response) => {
-      setProducts(response);
-    });
-  }, []);
-
-  const borrarProducto = (id) => {
-    deleteProduct(id).then((respuesta) => {
-      console.log(respuesta);
-      const productNew = products.filter((product) => product.id !== id);
-      setProducts(productNew);
-    });
+  const handleClose = () => {
+    setShow(false);
+  };
+  const handleShow = (product) => {
+    // console.log(product);
+    setProducto(product);
+    setShow(true);
   };
 
   return (
-    <table className="table table-striped">
-      <thead>
-        <tr>
-          <th scope="col">#</th>
-          <th scope="col">Title</th>
-          <th scope="col">Price</th>
-          <th scope="col">Categoría</th>
-          <th></th>
-        </tr>
-      </thead>
-      <tbody>
-        {products.map((product) => (
-          <tr key={product.id}>
-            <th scope="row">{product.id}</th>
-            <td>{product.title}</td>
-            <td>{product.price}</td>
-            <td>{product.category}</td>
-            <td>
-              <button
-                onClick={() => borrarProducto(product.id)}
-                className="btn btn-danger"
-              >
-                x
-              </button>
-            </td>
+    <>
+      <table className="table table-striped">
+        <thead>
+          <tr>
+            <th scope="col">#</th>
+            <th scope="col">Title</th>
+            <th scope="col">Price</th>
+            <th scope="col">Categoría</th>
+            <th></th>
           </tr>
-        ))}
-      </tbody>
-    </table>
+        </thead>
+        <tbody>
+          {products.map((product) => (
+            <tr key={product.id}>
+              <th scope="row">{product.id}</th>
+              <td>{product.title}</td>
+              <td>{product.price}</td>
+              <td>{product.category}</td>
+              <td>
+                <div className="d-flex gap-2">
+                  <button
+                    onClick={() => borrarProducto(product)}
+                    className="btn btn-danger"
+                  >
+                    <i className="fa fa-trash-o" aria-hidden="true"></i>
+                  </button>
+                  <button
+                    onClick={() => handleShow(product)}
+                    className="btn btn-warning"
+                  >
+                    <i className="fa fa-pencil" aria-hidden="true"></i>
+                  </button>
+                </div>
+              </td>
+            </tr>
+          ))}
+        </tbody>
+      </table>
+      {show && (
+        <ModalUpdateApp
+          producto={producto}
+          show={show}
+          handleClose={handleClose}
+          updateProduct={updateProduct}
+        />
+      )}
+    </>
   );
 };
 

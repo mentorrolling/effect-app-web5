@@ -1,16 +1,15 @@
-import React from "react";
+import React, { useState } from "react";
 import { useForm } from "react-hook-form";
-import { postProduct } from "../helpers/apiFake";
 
-const FormAddProductApp = () => {
+// import { postProduct } from "../helpers/apiFake";
+
+const FormAddProductApp = ({ addProduct }) => {
   const { register, handleSubmit, reset, setFocus } = useForm();
 
   const agregarProducto = (datos) => {
-    postProduct(datos).then((respuesta) => {
-      console.log(respuesta);
-      reset();
-      setFocus("title");
-    });
+    addProduct(datos);
+    reset();
+    setFocus("title");
   };
   return (
     <div className="row">

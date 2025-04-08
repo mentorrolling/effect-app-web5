@@ -6,7 +6,7 @@ import ProtectedRoutes from "./routes/ProtectedRoutes";
 
 const App = () => {
   return (
-    <div className="bg-light vh-100">
+    <div className="bg-light min-vh-100">
       <BrowserRouter>
         <Routes>
           <Route
