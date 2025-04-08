@@ -2,6 +2,8 @@ import React, { useEffect } from "react";
 import { useForm } from "react-hook-form";
 import { useNavigate } from "react-router-dom";
 
+import { usuariosRegistrados } from "../data/datos";
+
 const LoginScreen = () => {
   const navigate = useNavigate();
 
@@ -18,10 +20,19 @@ const LoginScreen = () => {
   }, []);
 
   const logIn = (datos) => {
-    localStorage.setItem("user", JSON.stringify(datos));
-    reset();
-    setFocus("correo");
-    navigate("/");
+    const { correo, password } = datos;
+    const validar = usuariosRegistrados.find(
+      (user) => user.email === correo && user.password === password
+    );
+
+    if (validar) {
+      localStorage.setItem("user", JSON.stringify(validar));
+      navigate("/");
+    } else {
+      alert("Correo o contraseña incorrectos");
+      setFocus("correo");
+      reset();
+    }
   };
 
   return (
