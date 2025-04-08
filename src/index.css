@@ -46,3 +46,25 @@
   transform: translateY(-50%);
   color: #667eea;
 }
+
+/* formulario de alta de producto  */
+.form-container {
+  max-width: 800px;
+  margin: 2rem auto;
+  padding: 2rem;
+  border-radius: 15px;
+  box-shadow: 0 0 15px rgba(0, 0, 0, 0.1);
+}
+.title-color {
+  color: #2c3e50;
+}
+.custom-btn {
+  background: #3498db;
+  color: white;
+  transition: all 0.3s;
+}
+.custom-btn:hover {
+  background: #2980b9;
+  transform: translateY(-2px);
+  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+}
