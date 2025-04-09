@@ -1,12 +1,22 @@
+import { useState } from "react";
 import { useForm } from "react-hook-form";
 
 const FormAddProductApp = ({ addProduct }) => {
   const { register, handleSubmit, reset, setFocus } = useForm();
+  const [show, setShow] = useState(false);
+  const agregarProducto = (datos) => {
+    addProduct(datos);
+    reset();
+    setFocus("title");
+    setShow(true);
+    setTimeout(() => {
+      setShow(false);
+    }, 2000);
+  };
 
-  const agregarProducto = (datos) => {};
   return (
     <div className="row">
-      <div className="col">
+      <div className="col-12">
         <form onSubmit={handleSubmit(agregarProducto)}>
           <div className="mb-4">
             <label className="form-label fw-bold">Nombre del Producto</label>
@@ -82,6 +92,13 @@ const FormAddProductApp = ({ addProduct }) => {
             </button>
           </div>
         </form>
+      </div>
+      <div className="col-12 mt-2">
+        {show && (
+          <div className="alert alert-success" role="alert">
+            Producto cargado con éxito!!
+          </div>
+        )}
       </div>
     </div>
   );

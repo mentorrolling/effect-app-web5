@@ -43,6 +43,16 @@ const NavBarApp = () => {
               </NavLink>
             </li>
             <li className="nav-item">
+              <NavLink
+                className={({ isActive }) =>
+                  isActive ? "nav-link fw-bold nav-rolling" : "nav-link"
+                }
+                to="/admin"
+              >
+                Admin
+              </NavLink>
+            </li>
+            <li className="nav-item">
               <Link className="nav-link" to="/login">
                 Cerrar sesión
               </Link>

@@ -1,18 +1,17 @@
 import { useState } from "react";
 
-
 const TableProductsApp = ({ products, borrarProducto, updateProduct }) => {
   const [producto, setProducto] = useState(null);
   const [show, setShow] = useState(false);
 
-  const handleClose = () => {
-    setShow(false);
-  };
-  const handleShow = (product) => {
-  
-    setProducto(product);
-    setShow(true);
-  };
+  // const handleClose = () => {
+  //   setShow(false);
+  // };
+  // const handleShow = (product) => {
+
+  //   setProducto(product);
+  //   setShow(true);
+  // };
 
   return (
     <>
@@ -22,7 +21,7 @@ const TableProductsApp = ({ products, borrarProducto, updateProduct }) => {
             <th scope="col">#</th>
             <th scope="col">Title</th>
             <th scope="col">Price</th>
-            <th scope="col">Categoría</th>
+            <th scope="col">Category</th>
             <th></th>
           </tr>
         </thead>
@@ -42,7 +41,7 @@ const TableProductsApp = ({ products, borrarProducto, updateProduct }) => {
                     <i className="fa fa-trash-o" aria-hidden="true"></i>
                   </button>
                   <button
-                    onClick={() => handleShow(product)}
+                    // onClick={() => handleShow(product)}
                     className="btn btn-warning"
                   >
                     <i className="fa fa-pencil" aria-hidden="true"></i>
@@ -53,9 +52,9 @@ const TableProductsApp = ({ products, borrarProducto, updateProduct }) => {
           ))}
         </tbody>
       </table>
-      {show && (
+      {/* {show && (
         // modal 
-      )}
+      )} */}
     </>
   );
 };

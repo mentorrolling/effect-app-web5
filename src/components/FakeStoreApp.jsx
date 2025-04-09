@@ -11,6 +11,7 @@ const FakeStoreApp = () => {
     getProducts().then((respuesta) => {
       setProducts(respuesta);
       setCurrentProducts(respuesta);
+      localStorage.setItem("productos", JSON.stringify(respuesta));
     });
   }, []);
 
