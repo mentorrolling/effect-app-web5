@@ -1,9 +1,14 @@
 import React, { useEffect } from "react";
 import { useForm } from "react-hook-form";
 import { useNavigate } from "react-router-dom";
+import Swal from "sweetalert2";
+import withReactContent from "sweetalert2-react-content";
+import { usuariosRegistrados } from "../data/datos";
 
 const LoginScreen = () => {
+  const MySwal = withReactContent(Swal);
   const navigate = useNavigate();
+  console.log(usuariosRegistrados);
 
   const {
     register,
@@ -18,10 +23,25 @@ const LoginScreen = () => {
   }, []);
 
   const logIn = (datos) => {
-    localStorage.setItem("user", JSON.stringify(datos));
-    reset();
-    setFocus("correo");
-    navigate("/");
+    const usuario = usuariosRegistrados.find(
+      (user) => user.email === datos.correo && user.password === datos.password
+    );
+
+    if (usuario) {
+      const { username, email, rol } = usuario;
+      localStorage.setItem("user", JSON.stringify({ username, email, rol }));
+      navigate("/");
+    } else {
+      MySwal.fire({
+        title: "OOPS!",
+        text: "Correo o contraseña incorrectos",
+        icon: "error",
+      });
+    }
+    // console.log(usuario);
+    // reset();
+    // setFocus("correo");
+    // navigate("/");
   };
 
   return (
