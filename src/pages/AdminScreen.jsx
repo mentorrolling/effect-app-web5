@@ -1,10 +1,13 @@
 import React, { useState } from "react";
+import Swal from "sweetalert2";
+import withReactContent from "sweetalert2-react-content";
 import FormAddProductApp from "../components/FormAddProductApp";
 import TableProductsApp from "../components/TableProductsApp";
 // Importar formulario para agregar producto
 // Importar Tabla de productos
 
 const AdminScreen = () => {
+  const MySwal = withReactContent(Swal);
   const [productos, setProductos] = useState(
     JSON.parse(localStorage.getItem("productos")) || []
   );
@@ -30,11 +33,23 @@ const AdminScreen = () => {
     const newProducts = productos.filter(
       (producto) => producto.id !== product.id
     );
-    const validar = confirm(`Va a eliminar el producto: ${product.title}`);
-    if (validar) {
-      setProductos(newProducts);
-      localStorage.setItem("productos", JSON.stringify(newProducts));
-    }
+    MySwal.fire({
+      title: `Va a eliminar el producto: ${product.title}`,
+      showDenyButton: true,
+      confirmButtonText: "Si",
+      denyButtonText: `No`,
+    }).then((result) => {
+      if (result.isConfirmed) {
+        setProductos(newProducts);
+        localStorage.setItem("productos", JSON.stringify(newProducts));
+      }
+    });
+
+    // const validar = confirm(`Va a eliminar el producto: ${product.title}`);
+    // if (validar) {
+    //   setProductos(newProducts);
+    //   localStorage.setItem("productos", JSON.stringify(newProducts));
+    // }
   };
 
   const updateProduct = (id, datos) => {

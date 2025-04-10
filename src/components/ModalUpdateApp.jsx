@@ -1,38 +1,32 @@
+import React from "react";
 import { useForm } from "react-hook-form";
-import Swal from "sweetalert2";
-import withReactContent from "sweetalert2-react-content";
+import Modal from "react-bootstrap/Modal";
 
-const FormAddProductApp = ({ addProduct }) => {
-  const MySwal = withReactContent(Swal);
+const ModalUpdateApp = (props) => {
+  const { show, handleClose, producto, updateProduct } = props;
 
-  const { register, handleSubmit, reset, setFocus } = useForm();
-
-  const agregarProducto = (datos) => {
-    addProduct(datos);
-    reset();
-    setFocus("title");
-    MySwal.fire({
-      title: "El producto se cargó con éxito!",
-      icon: "success",
-      showConfirmButton: false,
-      timer: 2000,
-    });
-    // setShow(true);
-    // setTimeout(() => {
-    //   setShow(false);
-    // }, 2000);
+  const { register, handleSubmit } = useForm();
+  const actualizarProducto = (datos) => {
+    updateProduct(producto.id, datos);
+    handleClose();
   };
-
+  //   console.log(producto);
   return (
-    <div className="row">
-      <div className="col-12">
-        <form onSubmit={handleSubmit(agregarProducto)}>
+    <Modal show={show} onHide={handleClose}>
+      <Modal.Header closeButton>
+        <Modal.Title>Modal heading</Modal.Title>
+      </Modal.Header>
+      <Modal.Body>
+        <form onSubmit={handleSubmit(actualizarProducto)}>
           <div className="mb-4">
             <label className="form-label fw-bold">Nombre del Producto</label>
             <input
               type="text"
               className="form-control form-control-lg"
-              {...register("title", { required: true })}
+              {...register("title", {
+                required: true,
+                value: producto.title,
+              })}
               placeholder="Ej: Smartphone X200"
             />
           </div>
@@ -45,27 +39,15 @@ const FormAddProductApp = ({ addProduct }) => {
                 <input
                   type="number"
                   className="form-control"
-                  {...register("price", { required: true })}
+                  {...register("price", {
+                    required: true,
+                    value: producto.price,
+                  })}
                   step="0.01"
                   min="0"
                   placeholder="Ej: 299.99"
                 />
               </div>
-            </div>
-
-            <div className="col-md-6">
-              <label className="form-label fw-bold">Categoría</label>
-              <select
-                className="form-select"
-                {...register("category", { required: true })}
-              >
-                <option>Electrónica</option>
-                <option>Hogar</option>
-                <option>Ropa</option>
-                <option>Deportes</option>
-                <option>Otros</option>
-              </select>
-              <div className="invalid-feedback">Selecciona una categoría</div>
             </div>
           </div>
 
@@ -73,7 +55,10 @@ const FormAddProductApp = ({ addProduct }) => {
             <label className="form-label fw-bold">Descripción</label>
             <textarea
               className="form-control"
-              {...register("description", { required: true })}
+              {...register("description", {
+                required: true,
+                value: producto.description,
+              })}
               rows="4"
               placeholder="Describe detalladamente el producto..."
             ></textarea>
@@ -88,7 +73,10 @@ const FormAddProductApp = ({ addProduct }) => {
               <input
                 type="url"
                 className="form-control"
-                {...register("image", { required: true })}
+                {...register("image", {
+                  required: true,
+                  value: producto.image,
+                })}
                 placeholder="https://ejemplo.com/imagen.jpg"
                 pattern="https://.*"
               />
@@ -96,14 +84,14 @@ const FormAddProductApp = ({ addProduct }) => {
           </div>
 
           <div className="d-grid">
-            <button type="submit" className="btn btn-lg custom-btn">
-              <i className="bi bi-save me-2"></i>Guardar Producto
+            <button type="submit" className="btn btn-lg btn-warning">
+              <i className="bi bi-save me-2"></i>Actualizar Producto
             </button>
           </div>
         </form>
-      </div>
-    </div>
+      </Modal.Body>
+    </Modal>
   );
 };
 
-export default FormAddProductApp;
+export default ModalUpdateApp;

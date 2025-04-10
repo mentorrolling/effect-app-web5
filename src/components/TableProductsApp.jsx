@@ -1,17 +1,17 @@
 import { useState } from "react";
+import ModalUpdateApp from "./ModalUpdateApp";
 
 const TableProductsApp = ({ products, borrarProducto, updateProduct }) => {
   const [producto, setProducto] = useState(null);
   const [show, setShow] = useState(false);
 
-  // const handleClose = () => {
-  //   setShow(false);
-  // };
-  // const handleShow = (product) => {
-
-  //   setProducto(product);
-  //   setShow(true);
-  // };
+  const handleClose = () => {
+    setShow(false);
+  };
+  const handleShow = (product) => {
+    setProducto(product);
+    setShow(true);
+  };
 
   return (
     <>
@@ -41,7 +41,7 @@ const TableProductsApp = ({ products, borrarProducto, updateProduct }) => {
                     <i className="fa fa-trash-o" aria-hidden="true"></i>
                   </button>
                   <button
-                    // onClick={() => handleShow(product)}
+                    onClick={() => handleShow(product)}
                     className="btn btn-warning"
                   >
                     <i className="fa fa-pencil" aria-hidden="true"></i>
@@ -52,9 +52,14 @@ const TableProductsApp = ({ products, borrarProducto, updateProduct }) => {
           ))}
         </tbody>
       </table>
-      {/* {show && (
-        // modal 
-      )} */}
+      {show && (
+        <ModalUpdateApp
+          show={show}
+          handleClose={handleClose}
+          producto={producto}
+          updateProduct={updateProduct}
+        />
+      )}
     </>
   );
 };
